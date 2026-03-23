@@ -1,7 +1,3 @@
-/* =====================================================
-   GLOBAL RESET
-   ===================================================== */
-
 * {
   margin: 0;
   padding: 0;
@@ -16,11 +12,10 @@ body {
 }
 
 section {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   position: relative;
 }
-
 
 
 /* =====================================================
@@ -107,8 +102,9 @@ section {
   display: block;
 }
 
+
 /* =====================================================
-   SECTION 2 — USER RECORDS PANEL
+   USER RECORDS PANEL
    ===================================================== */
 
 #recordsPanel {
@@ -183,6 +179,7 @@ section {
   padding: 10px;
   border: 1px solid #d6d6d6;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 
 .records-card img {
@@ -203,8 +200,76 @@ section {
   background: rgba(0, 0, 0, 0.05);
 }
 
+
 /* =====================================================
-   TRANSITION SECTION
+   INTERVENTION PANEL
+   ===================================================== */
+
+#interventionPanel {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 350px;
+  min-height: 160px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #111;
+  backdrop-filter: blur(6px);
+  z-index: 21;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.6s ease;
+}
+
+#interventionPanel:hover {
+  transform: translateY(-2px);
+}
+
+.intervention-content {
+  width: 100%;
+  height: 100%;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.intervention-instruction {
+  font-size: 9px;
+  line-height: 1.25;
+  letter-spacing: 0.05em;
+  color: #666;
+  margin-bottom: 12px;
+  text-transform: lowercase;
+}
+
+.intervention-title {
+  font-size: 16px;
+  line-height: 0.95;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.intervention-routine {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.intervention-routine span {
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: #7a7a7a;
+}
+
+
+
+
+/* =====================================================
+   OPTIONAL TRANSITION SECTION
    ===================================================== */
 
 #transition {
@@ -273,12 +338,6 @@ section {
   font-family: monospace;
 }
 
-
-
-/* =====================================================
-   ROUTINE LIST (TRANSITION)
-   ===================================================== */
-
 .routine-item {
   display: flex;
   align-items: flex-start;
@@ -320,7 +379,6 @@ section {
 }
 
 
-
 /* =====================================================
    FADE-IN ANIMATION
    ===================================================== */
@@ -337,16 +395,80 @@ section {
 }
 
 
+/* =====================================================
+   MODAL WINDOW
+   ===================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.42);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 24px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-window {
+  width: min(1280px, 95vw);
+  height: 90vh;
+  background: #f5f2ec;
+  border: 2px solid #111;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+}
+
+.modal-header {
+  height: 52px;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid #d8d1c7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: #111;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.modal-body #section-3 {
+  min-height: auto;
+  padding-bottom: 60px;
+}
+
 
 /* =====================================================
    SECTION 3 — CONSUMER INTERFACE
    ===================================================== */
 
 #section-3 {
-  min-height: 100vh;
+  min-height: auto;
   margin-top: 0;
   background: #f5f2ec;
-  padding: 0 0 120px 0;
+  padding: 0 0 70px 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -354,31 +476,32 @@ section {
   background: #111;
   color: #fff;
   text-align: center;
-  font-size: 14px;
-  padding: 12px 20px;
+  font-size: 12px;
+  padding: 10px 16px;
   letter-spacing: 0.02em;
 }
 
 .shop-shell {
-  width: min(1480px, 94vw);
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
-  padding-top: 28px;
+  padding: 20px 22px 0;
 }
 
 .shop-header {
   display: grid;
-  grid-template-columns: 260px 1fr 220px;
-  gap: 40px;
+  grid-template-columns: 210px 1fr 160px;
+  gap: 24px;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .shop-logo {
-  font-size: clamp(28px, 3vw, 52px);
-  letter-spacing: 0.2em;
+  font-size: clamp(24px, 2.6vw, 42px);
+  letter-spacing: 0.16em;
   font-weight: 500;
   color: #111;
-  margin-left: -10px;
+  margin-left: 0;
 }
 
 .shop-search-wrap {
@@ -388,12 +511,12 @@ section {
 
 .shop-search {
   width: 100%;
-  height: 56px;
+  height: 46px;
   border: 1px solid #d3cdc3;
   border-radius: 999px;
   background: transparent;
-  padding: 0 22px;
-  font-size: 16px;
+  padding: 0 18px;
+  font-size: 14px;
   outline: none;
   color: #111;
   text-align: center;
@@ -408,19 +531,19 @@ section {
 .shop-icons {
   display: flex;
   justify-content: flex-end;
-  gap: 18px;
-  font-size: 14px;
+  gap: 12px;
+  font-size: 12px;
   text-transform: uppercase;
   color: #111;
 }
 
 .shop-nav {
   display: flex;
-  gap: 28px;
+  gap: 20px;
   flex-wrap: wrap;
-  padding: 18px 0 20px;
+  padding: 14px 0 16px;
   border-bottom: 1px solid #ddd6cc;
-  font-size: 15px;
+  font-size: 14px;
   text-transform: lowercase;
   color: #111;
 }
@@ -444,32 +567,32 @@ section {
 }
 
 .shop-recommendation {
-  font-size: 14px;
+  font-size: 13px;
   color: #b30000;
   text-transform: lowercase;
-  letter-spacing: 0.05em;
-  line-height: 1.5;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  margin-top: 14px;
 }
 
 .category-row {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
   margin-top: 18px;
-  margin-bottom: 48px;
+  margin-bottom: 30px;
 }
 
 .category-pill {
   border: 1px solid #d9d2c8;
   border-radius: 999px;
-  padding: 18px 12px;
+  padding: 14px 10px;
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   background: rgba(255, 255, 255, 0.6);
   color: #111;
   text-transform: lowercase;
 }
-
 
 
 /* =====================================================
@@ -478,15 +601,16 @@ section {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 26px;
-  margin-top: 28px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
 }
 
 .product-card {
   background: #fffdfa;
   border: 1px solid #ddd6cc;
-  min-height: 430px;
+  min-height: 320px;
+  width: 100%;
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
@@ -499,7 +623,7 @@ section {
 
 .card-state {
   display: none;
-  min-height: 430px;
+  min-height: 320px;
 }
 
 .card-state.active {
@@ -508,7 +632,7 @@ section {
 }
 
 .product-image {
-  height: 250px;
+  height: 170px;
   border-bottom: 1px solid #ebe4da;
   background-color: #f7f4ee;
   background-size: contain;
@@ -519,38 +643,33 @@ section {
 }
 
 .product-info {
-  padding: 22px 22px 26px;
+  padding: 16px 16px 18px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .product-info.alt {
   justify-content: center;
-  min-height: 430px;
-  padding: 28px 24px;
+  min-height: 320px;
+  padding: 22px 18px;
 }
 
 .product-tag {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-size: 9px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #8d867c;
 }
 
 .product-tag.system {
   color: #b30000;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
 }
 
 .card-state .product-tag.system + ul li {
   color: #b30000;
-}
-
-.product-info ul {
-  margin-top: 16px;
-  gap: 14px;
 }
 
 .product-tag.danger {
@@ -558,16 +677,16 @@ section {
 }
 
 .product-info h3 {
-  font-size: 30px;
-  line-height: 1.02;
+  font-size: 18px;
+  line-height: 1.05;
   font-weight: 500;
   letter-spacing: -0.02em;
   color: #111;
 }
 
 .product-copy {
-  font-size: 15px;
-  line-height: 1.45;
+  font-size: 12px;
+  line-height: 1.35;
   color: #3d3b38;
 }
 
@@ -575,14 +694,14 @@ section {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 .product-info li {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 23px;
-  line-height: 1.12;
+  font-size: 16px;
+  line-height: 1.15;
   color: #111;
   letter-spacing: -0.01em;
   font-weight: 300;
@@ -602,24 +721,23 @@ section {
 .product-7 { background-image: url("product-7.png"); }
 .product-8 { background-image: url("product-8.png"); }
 
+
 /* =====================================================
    PAGINATION
    ===================================================== */
 
-
-   
 .shop-pagination-wrap {
-  margin-top: 40px;
-  padding: 20px 0 40px;
-  padding-top: 30px;
+  margin-top: 50px;
+  padding: 28px 0 10px;
   text-align: center;
   border-top: 1px solid #e5ded4;
+  width: 100%;
 }
 
 .results-count {
   font-size: 18px;
   color: #5f5b56;
-  margin-bottom: 26px;
+  margin-bottom: 18px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -627,8 +745,17 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  gap: 22px;
   flex-wrap: wrap;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .page-btn {
@@ -642,15 +769,6 @@ section {
 
 .page-btn:hover {
   opacity: 0.7;
-}
-
-.page-numbers {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .page-number,
@@ -668,65 +786,31 @@ section {
   font-weight: 700;
 }
 
-@media (max-width: 700px) {
-  .pagination {
-    gap: 16px;
-  }
-
-  .page-number,
-  .page-ellipsis,
-  .page-btn,
-  .results-count {
-    font-size: 16px;
-  }
-}
-
-
 
 /* =====================================================
    RESPONSIVE
    ===================================================== */
 
-@media (max-width: 1200px) {
-  .category-row {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 1100px) {
   .shop-header {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .shop-icons {
     justify-content: flex-start;
   }
 
-  .shop-meta {
-    flex-direction: column;
-    align-items: flex-start;
+  .category-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  #section-2 {
-    padding: 90px 0 180px;
-  }
-
-  .writing-card {
-    padding: 20px;
-    width: min(92vw, 700px);
-  }
-
-  .record-overlay {
-    right: 20px;
-    top: 12px;
-  }
-
   .transition-inner {
     padding: 9vh 0 0;
   }
@@ -743,26 +827,51 @@ section {
   .consumer-term {
     font-size: 16px;
   }
-}
 
-@media (max-width: 700px) {
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .category-row {
-    grid-template-columns: repeat(2, 1fr);
+  .shop-shell {
+    padding: 18px 16px 0;
   }
 
   .shop-logo {
     font-size: 34px;
   }
 
+  .shop-search {
+    height: 42px;
+    font-size: 13px;
+  }
+
+  .category-pill {
+    font-size: 12px;
+    padding: 12px 8px;
+  }
+}
+
+@media (max-width: 700px) {
+  .pagination {
+    gap: 16px;
+  }
+
+  .page-number,
+  .page-ellipsis,
+  .page-btn,
+  .results-count {
+    font-size: 16px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .product-info h3 {
-    font-size: 26px;
+    font-size: 22px;
   }
 
   .product-info li {
-    font-size: 21px;
+    font-size: 18px;
   }
 }
