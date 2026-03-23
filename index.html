@@ -78,80 +78,69 @@
   </div>
 </div>
 
-  <!-- ================= TRANSITION ================= -->
-  <section id="transition">
-    <div class="transition-inner">
+<!-- ================= POST-CLINICAL PANEL ================= -->
+<div id="interventionPanel" onclick="openModal()">
+  <div class="intervention-content">
+    <p class="intervention-instruction">click to access post-clinical recommendation</p>
+    <p class="intervention-title">POST-CLINICAL</p>
+    <p class="intervention-title">RECOMMENDATION</p>
 
-      <div class="transition-intro fade-up">
-        <p class="transition-label">POST-CLINICAL RECOMMENDATION</p>
-      </div>
-
-      <div class="transition-step fade-up">
-        <div class="routine-item">
-          <div class="routine-number">01</div>
-          <div class="routine-content">
-            <p class="clinical-term">surface renewal</p>
-            <p class="consumer-term">daily exfoliating solution</p>
-          </div>
-        </div>
-
-        <div class="routine-item">
-          <div class="routine-number">02</div>
-          <div class="routine-content">
-            <p class="clinical-term">oil regulation</p>
-            <p class="consumer-term">pore refining serum</p>
-          </div>
-        </div>
-
-        <div class="routine-item">
-          <div class="routine-number">03</div>
-          <div class="routine-content">
-            <p class="clinical-term">barrier support</p>
-            <p class="consumer-term">barrier repair cream</p>
-          </div>
-        </div>
-      </div>
-
+    <div class="intervention-routine">
+      <span>01 daily exfoliating solution</span>
+      <span>02 pore refining serum</span>
+      <span>03 barrier repair cream</span>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ================= SECTION 3 ================= -->
-  <section id="section-3">
-    <div class="shop-banner">15% off your first routine</div>
 
-    <div class="shop-shell">
 
-      <header class="shop-header">
-        <div class="shop-logo">SEPHORA_</div>
+<!-- ================= MODAL WINDOW ================= -->
+<div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+  <div class="modal-window" onclick="event.stopPropagation()">
 
-        <div class="shop-search-wrap">
-          <div class="shop-search">Search products, concerns, ingredients</div>
-        </div>
+    <div class="modal-header">
+      <span> POST-CLINICAL RECOMMENDATION</span>
+      <button type="button" class="modal-close" onclick="closeModal(event)">×</button>
+    </div>
 
-        <div class="shop-icons">ACCOUNT WISHLIST BAG</div>
-      </header>
+<!--sephora part-->
 
-      <nav class="shop-nav">
-        <span>Skincare</span>
-        <span>Routines</span>
-        <span>Ingredients</span>
-        <span>Concerns</span>
-        <span class="active">For You</span>
-      </nav>
+    <div class="modal-body">
+      <section id="section-3">
+        <div class="shop-banner">15% off your first routine</div>
 
-      <div class="shop-recommendation">
-        recommended for: surface renewal / oil regulation / barrier support
-      </div>
+        <div class="shop-shell">
+          <header class="shop-header">
+            <div class="shop-logo">SEPHORA_</div>
 
-      <div class="category-row">
-        <div class="category-pill">Surface Renewal</div>
-        <div class="category-pill">Oil Regulation</div>
-        <div class="category-pill">Barrier Support</div>
-        <div class="category-pill">Texture</div>
-      </div>
+            <div class="shop-search-wrap">
+              <div class="shop-search">Search products, concerns, ingredients</div>
+            </div>
 
-      <!-- ================= PRODUCT GRID ================= -->
- <div class="product-grid">
+            <div class="shop-icons">ACCOUNT WISHLIST BAG</div>
+          </header>
+
+          <nav class="shop-nav">
+            <span>skincare</span>
+            <span>routines</span>
+            <span>ingredients</span>
+            <span>concerns</span>
+            <span class="active">for you</span>
+          </nav>
+
+          <div class="shop-recommendation">
+            recommended for: surface renewal / oil regulation / barrier support
+          </div>
+
+          <div class="category-row">
+            <div class="category-pill">surface renewal</div>
+            <div class="category-pill">oil regulation</div>
+            <div class="category-pill">barrier support</div>
+            <div class="category-pill">texture</div>
+          </div>
+
+<div class="product-grid">
 
   <!-- CARD 1 -->
   <article class="product-card" onclick="cycleCard(this)">
@@ -430,20 +419,24 @@
     </div>
   </article>
 
-</div>
+          </div>
 
-      <div class="shop-pagination-wrap">
-        <p class="results-count">Showing 8 of ∞</p>
+          <div class="shop-pagination-wrap">
+            <p class="results-count">Showing 8 of ∞</p>
 
-        <div class="pagination">
-          <button class="page-btn prev-btn" onclick="changePage(-1)">Previous</button>
-          <div class="page-numbers" id="pageNumbers"></div>
-          <button class="page-btn next-btn" onclick="changePage(1)">Next</button>
+            <div class="pagination">
+              <button class="page-btn prev-btn" onclick="changePage(-1)">Previous</button>
+              <div class="page-numbers" id="pageNumbers"></div>
+              <button class="page-btn next-btn" onclick="changePage(1)">Next</button>
+            </div>
+          </div>
+
         </div>
-      </div>
+      </section>
 
     </div>
-  </section>
+  </div>
+</div>
 
   <!-- ================= JAVASCRIPTS ================= -->
 <script>
@@ -472,6 +465,8 @@ function openRecord(url) {
 
 function cycleCard(card) {
   const states = card.querySelectorAll(".card-state");
+  const dots = card.querySelectorAll(".dot");
+
   let currentIndex = 0;
 
   states.forEach((state, index) => {
@@ -483,6 +478,17 @@ function cycleCard(card) {
 
   const nextIndex = (currentIndex + 1) % states.length;
   states[nextIndex].classList.add("active");
+
+  dots.forEach(dot => dot.classList.remove("active"));
+  if (dots[nextIndex]) dots[nextIndex].classList.add("active");
+}
+
+function openModal() {
+  document.getElementById("modalOverlay").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modalOverlay").style.display = "none";
 }
 
 const fadeEls = document.querySelectorAll(".fade-up");
