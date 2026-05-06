@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FaceMesh Scan</title>
 
+  <!-- p5.js used for the canvas-based rendering of the FaceMesh output -->
+<!-- ml5.js provides the FaceMesh model for real-time facial tracking -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.10/p5.min.js"></script>
   <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
 
@@ -14,6 +16,8 @@
 <body>
 
   <!-- ================= SECTION 1 ================= -->
+   <!-- Initial scan interface: establishes the user as subject of analysis -->
+<!-- The dermatology panel simulates real-time diagnostic metrics -->
   <section id="section1">
     <div id="dermaPanel">
       <strong>DERMATOLOGY SCAN // ACTIVE</strong><br><br>
@@ -26,7 +30,11 @@
     </div>
   </section>
 
+        <!-- Metrics are intentionally vague/constructed to simulate authority -- (make it randomised!!!) -->
+
   <!-- ================= SCIENCE PANEL ================= -->
+  <!-- Displays rotating “scientific” imagery to reinforce credibility of the scan -->
+  <!-- Images loop to suggest an ongoing analytical process -->
 <div id="sciencePanel">
   <div class="science-header">
 <strong>SCIENTIFIC BASIS</strong>
@@ -79,6 +87,8 @@
 </div>
 
 <!-- ================= POST-CLINICAL PANEL ================= -->
+<!-- Transition point from diagnosis to intervention -->
+<!-- Click interaction reveals how analysis leads to prescribed action -->
 <div id="interventionPanel" onclick="openModal()">
   <div class="intervention-content">
     <p class="intervention-instruction">click to access post-clinical recommendation</p>
@@ -97,6 +107,7 @@
 
 <!-- ================= MODAL WINDOW ================= -->
 <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+  <!-- Prevent clicks inside modal from closing it -->
   <div class="modal-window" onclick="event.stopPropagation()">
 
     <div class="modal-header">
@@ -140,11 +151,13 @@
             <div class="category-pill">texture</div>
           </div>
 
+<!-- Grid containing all product cards -->
 <div class="product-grid">
 
   <!-- CARD 1 -->
+   <!-- Product card with multiple states -->
   <article class="product-card" onclick="cycleCard(this)">
-    <div class="card-state active">
+    <div class="card-state active"> <!-- active state... the default view-->
       <div class="product-image product-1"></div>
       <div class="product-info">
         <p class="product-tag">surface renewal</p>
@@ -153,6 +166,7 @@
       </div>
     </div>
 
+    <!-- Hidden states shown on click -->
     <div class="card-state">
       <div class="product-info alt">
         <p class="product-tag">ingredients</p>
@@ -440,35 +454,42 @@
 
   <!-- ================= JAVASCRIPTS ================= -->
 <script>
+  // Get references to UI elements
 const panel = document.getElementById("dermaPanel");
 const sciencePanel = document.getElementById("sciencePanel");
 const recordsPanel = document.getElementById("recordsPanel");
 const section1 = document.getElementById("section1");
 
+// Listen for scroll events
 window.addEventListener("scroll", () => {
   const bottom = section1.getBoundingClientRect().bottom;
 
+  // Hide panels when section1 scrolls out of view
   if (bottom <= 0) {
     panel.classList.add("hidden");
     sciencePanel.classList.add("hidden");
     recordsPanel.classList.add("hidden");
   } else {
+        // Show panels when section1 is visible
     panel.classList.remove("hidden");
     sciencePanel.classList.remove("hidden");
     recordsPanel.classList.remove("hidden");
   }
 });
 
+// Redirect to selected record page
 function openRecord(url) {
   window.location.href = url;
 }
 
+// Cycle through card states when clicked
 function cycleCard(card) {
   const states = card.querySelectorAll(".card-state");
   const dots = card.querySelectorAll(".dot");
 
   let currentIndex = 0;
 
+    // Find current active state
   states.forEach((state, index) => {
     if (state.classList.contains("active")) {
       currentIndex = index;
@@ -476,23 +497,29 @@ function cycleCard(card) {
     }
   });
 
+    // Activate next state
   const nextIndex = (currentIndex + 1) % states.length;
   states[nextIndex].classList.add("active");
 
+    // Update dot indicators (if present)
   dots.forEach(dot => dot.classList.remove("active"));
   if (dots[nextIndex]) dots[nextIndex].classList.add("active");
 }
 
+// Show modal overlay
 function openModal() {
   document.getElementById("modalOverlay").style.display = "flex";
 }
 
+// Hide modal and prevent event propagation to avoid immediate re-opening
 function closeModal() {
   document.getElementById("modalOverlay").style.display = "none";
 }
 
+// Select elements with fade animation 
 const fadeEls = document.querySelectorAll(".fade-up");
 
+// Observe when elements enter the viewport
 const fadeObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -518,6 +545,7 @@ const scienceImages = [
 let currentScienceImage = 0;
 const scienceImageEl = document.getElementById("scienceImage");
 
+// Change image every interval
 function rotateScienceImage() {
   if (!scienceImageEl) return;
 
@@ -525,6 +553,7 @@ function rotateScienceImage() {
   scienceImageEl.src = scienceImages[currentScienceImage];
 }
 
+// Run every 2 seconds
 setInterval(rotateScienceImage, 2000);
 
 function renderPagination() {
