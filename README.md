@@ -30,7 +30,7 @@ The website is organised into three main stages:
 
 3. **Commercial (Consumption)**
    - E-commerce inspired interface
-   - Interactive product cards (click to reveal layers)
+   - Interactive product cards (click on each card to reveal layers)
    - Simulates recommendation systems and ongoing dependency
 
 ## Technologies Used
