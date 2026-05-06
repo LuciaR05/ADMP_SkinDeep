@@ -4,7 +4,6 @@ The project can be accessed as a fully functional interactive website:
 
 🌐 https://luciar05.github.io/ADMP_SkinDeep/
 
-<!-- Optional sentence -->
 <!-- The deployed version preserves the intended interactive structure and allows real-time engagement with the FaceMesh scanning system. -->
 
 <!-- ================= REPOSITORY ================= -->
